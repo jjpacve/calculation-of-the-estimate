@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<title> Калькулятор баллов </title>
+<style>
+    body {
+        background-color: #0f172a;
+    }
+
+    h1, h2, h3, h4 {
+        color: #e2e8f0;
+        font-family: Georgia;
+        font-size: 24px;
+    }
+
+    input, select {
+        background-color: #1e293b;
+        color: #f1f5f9;
+        border: 1px solid #64748b;
+    }
+
+    input {
+        padding: 20px;
+        font-size: 30px;
+    }
+
+    select {
+        padding: 30px;
+        appearance: none;
+    }
+
+    button {
+        background-color: #5eead4;
+        color: #042f2e;
+        border: 1px solid #5eead4;
+        padding: 10px;
+    }
+
+    button:hover {
+        background-color: #99f6e4;
+    }
+
+    input:focus-visible, select:focus-visible, button:focus-visible {
+        outline: 2px solid #5eead4;
+        outline-offset: 2px;
+    }
+
+    p {
+        color: #fde68a;
+        font-size: 24px;
+    }
+</style>
+</head>
+<body>
+    <h4>Какая оценка вам нужна</h4>
+    <select id="grade">
+        <option> 4 </option>
+        <option> 5 </option>
+</select>
+    <h1>Напишите свой процент ФО</h1>
+    <input type="text" id="fo">
+    <h2> Напишите свой процент СОР</h2>
+    <input type ="text" id="sor">
+    <h3>Максимум баллов за СОЧ</h3>
+    <input type="text" id="soch-max">
+    <button id="calculate" > Отправить</button>
+    <p id="result">Здесь появится результат</p>
+    <script src="Расчет.js"></script>
+</body>
+</html>
