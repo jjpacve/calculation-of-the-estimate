@@ -1,7 +1,0 @@
-# Tauri local build output
-/dist/
-/node_modules/
-/src-tauri/target/
-# Generated icons are created automatically in GitHub Actions
-/src-tauri/icons/
-.DS_Store
