@@ -1,0 +1,68 @@
+name: Desktop (Windows and macOS)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/desktop.yml"
+      - "src-tauri/**"
+      - "scripts/**"
+      - "app-icon.svg"
+      - "package.json"
+      - "index.html"
+      - "Расчет.js"
+
+permissions:
+  contents: read
+
+jobs:
+  desktop:
+    name: Build ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            name: windows
+            bundles: nsis
+          - os: macos-latest
+            name: macos-apple-silicon
+            bundles: dmg
+    runs-on: ${{ matrix.os }}
+    env:
+      APPLE_SIGNING_IDENTITY: "-"
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Rust compilation
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: "./src-tauri -> target"
+
+      - name: Install Tauri CLI
+        run: npm install --no-audit --no-fund
+
+      - name: Generate Windows/macOS icons
+        run: npm run tauri -- icon app-icon.svg
+
+      - name: Build desktop installer
+        run: npm run tauri -- build --bundles ${{ matrix.bundles }}
+
+      - name: Upload installers
+        uses: actions/upload-artifact@v4
+        with:
+          name: installer-${{ matrix.name }}
+          path: |
+            src-tauri/target/release/bundle/nsis/*.exe
+            src-tauri/target/release/bundle/dmg/*.dmg
+          if-no-files-found: error
