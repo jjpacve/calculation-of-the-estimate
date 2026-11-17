@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'none'">
+    <title>Оценка за СОР</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main>
+        <h1>Оценка за СОР</h1>
+        <p class="hint">Набранный балл ÷ максимальный балл × 100%</p>
+        <form id="sor-form" novalidate>
+            <label for="sor-points">Набранный балл</label>
+            <input type="text" inputmode="decimal" id="sor-points" autofocus>
+            <label for="sor-max">Максимальный балл за СОР</label>
+            <input type="text" inputmode="decimal" id="sor-max">
+            <button type="submit">Рассчитать оценку</button>
+        </form>
+        <p id="sor-result" class="result" role="status" aria-live="polite">Здесь появятся процент и оценка</p>
+        <p class="hint">Шкала: от 85% — «5», от 65% — «4», от 40% — «3», ниже 40% — «2».</p>
+    </main>
+    <script src="sor-calculation.js"></script>
+    <script src="sor.js"></script>
+</body>
+</html>
