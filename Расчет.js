@@ -1,12 +1,25 @@
 const result = document.getElementById("result");
-const button = document.getElementById("calculate");
+const form = document.getElementById("soch-form");
+let sorPopup;
+
+document.getElementById("open-sor").addEventListener("click", () => {
+    if (window.calculatorDesktop) {
+        window.calculatorDesktop.openSor();
+    } else if (sorPopup && !sorPopup.closed) {
+        sorPopup.focus();
+    } else {
+        sorPopup = window.open("sor.html", "sor-grade", "width=560,height=670");
+        if (sorPopup) sorPopup.opener = null;
+    }
+});
 
 function readNumber(id) {
     const text = document.getElementById(id).value.trim();
     return text === "" ? NaN : Number(text.replace(",", "."));
 }
 
-button.addEventListener("click", function () {
+form.addEventListener("submit", function (event) {
+    event.preventDefault();
     const grade = document.getElementById("grade").value;
     const fo = readNumber("fo");
     const sor = readNumber("sor");

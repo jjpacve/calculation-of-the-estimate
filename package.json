@@ -1,0 +1,50 @@
+{
+  "name": "school-grade-calculator",
+  "version": "1.1.0",
+  "description": "Калькулятор баллов за СОЧ и оценки за СОР",
+  "author": "jjpacve",
+  "private": true,
+  "main": "desktop/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test test/*.test.cjs",
+    "test:ui": "playwright test",
+    "test:desktop": "playwright test --config playwright.desktop.config.cjs",
+    "pack": "electron-builder --dir",
+    "dist:win": "electron-builder --win nsis --x64 --publish never",
+    "dist:mac": "electron-builder --mac dmg --x64 --arm64 --publish never"
+  },
+  "build": {
+    "appId": "io.github.jjpacve.gradecalculator",
+    "productName": "Grade Calculator",
+    "artifactName": "Grade-Calculator-${version}-${os}-${arch}.${ext}",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "index.html",
+      "Расчет.js",
+      "sor.html",
+      "sor.js",
+      "sor-calculation.js",
+      "styles.css",
+      "desktop/**"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.education"
+    }
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.1",
+    "electron": "45.3.3",
+    "electron-builder": "26.18.0"
+  }
+}
